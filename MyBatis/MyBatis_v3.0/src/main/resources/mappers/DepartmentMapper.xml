@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<!-- namespace：当前XML文件用于配置哪个接口中抽象方法对应的SQL语句 -->
+<mapper namespace="cn.tedu.mybatis.DepartmentMapper">
+
+	<resultMap id="DepartmentVOMap"
+		type="cn.tedu.mybatis.DepartmentVO">
+		<id column="did" property="id"/>
+		<result column="name" property="name"/>
+		<!-- collection节点：用于配置集合类型的属性 -->
+		<!-- property：依然表示类的属性 -->
+		<!-- ofType：集合里面放的是什么类型的数据 -->
+		<collection property="users"
+			ofType="cn.tedu.mybatis.User">
+			<!-- column：依然是查询结果中的列名 -->
+			<!-- property：ofType的类型中的属性名 -->
+			<id column="uid" property="id"/>
+			<result column="username" property="username"/>
+			<result column="password" property="password"/>
+			<result column="age" property="age"/>
+			<result column="phone" property="phone"/>
+			<result column="email" property="email"/>
+			<result column="is_delete" property="isDelete"/>
+			<result column="department_id" property="departmentId"/>
+		</collection>
+	</resultMap>
+
+	<select id="findVOById"
+		resultMap="DepartmentVOMap">
+		SELECT 
+			t_department.id AS did, name,
+			t_user.id AS uid, username,
+			password, age,
+			phone, email,
+			is_delete, department_id
+		FROM
+			t_department
+		LEFT JOIN
+			t_user
+		ON
+			t_department.id=t_user.department_id
+		WHERE
+			t_department.id=#{id}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
