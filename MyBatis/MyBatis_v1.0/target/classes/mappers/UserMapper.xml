@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<!-- namespace：当前XML文件用于配置哪个接口中抽象方法对应的SQL语句 -->
+<mapper namespace="cn.tedu.mybatis.UserMapper">
+
+	<!-- 使用insert节点配置插入数据的SQL语句 -->
+	<!-- id：抽象方法的方法名 -->
+	<!-- 在#{}中间的是方法的参数User类中的属性名称 -->
+	<insert id="insert"
+		useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO t_user (
+			username, password,
+			age, phone,
+			email
+		) VALUES (
+			#{username}, #{password},
+			#{age}, #{phone},
+			#{email}
+		)
+	</insert>
+	
+	<delete id="deleteById">
+		DELETE FROM t_user WHERE id=#{a}
+	</delete>
+	
+	<update id="updatePassword">
+		UPDATE t_user SET password=#{a}
+	</update>
+	
+</mapper>
+
+
+
+
+
+
