@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<!-- namespace：当前XML文件用于配置哪个接口中抽象方法对应的SQL语句 -->
+<mapper namespace="cn.tedu.springboot.sample.mapper.UserMapper">
+
+	<!-- resultMap节点：指导MyBatis如何封装查询结果 -->
+	<!-- id：自定义名称 -->
+	<!-- column：查询结果中的列名 -->
+	<!-- property：type对应的类中的属性名 -->
+	<resultMap id="UserEntityMap"
+		 type="cn.tedu.springboot.sample.entity.User">
+		<id column="id" property="id" />
+		<result column="username" property="username" />
+		<result column="password" property="password" />
+		<result column="age" property="age" />
+		<result column="phone" property="phone" />
+		<result column="email" property="email" />
+		<result column="is_delete" property="isDelete" />
+		<result column="department_id" property="departmentId" />
+	</resultMap>
+
+	<!-- 使用insert节点配置插入数据的SQL语句 -->
+	<!-- id：抽象方法的方法名 -->
+	<!-- 在#{}中间的是方法的参数User类中的属性名称 -->
+	<insert id="insert"
+		useGeneratedKeys="true"
+		keyProperty="id">
+		INSERT INTO t_user (
+			username, password,
+			age, phone,
+			email, is_delete,
+			department_id
+		) VALUES (
+			#{username}, #{password},
+			#{age}, #{phone},
+			#{email}, #{isDelete},
+			#{departmentId}
+		)
+	</insert>
+	
+	<select id="findByUsername"
+		resultMap="UserEntityMap">
+		SELECT 
+			* 
+		FROM 
+			t_user 
+		WHERE 
+			username=#{username} 
+	</select>
+	
+</mapper>
+
+
+
+
+
+
