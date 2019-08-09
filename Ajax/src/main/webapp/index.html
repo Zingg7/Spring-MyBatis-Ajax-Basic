@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+var jsonString = '{'
+	+ '"username":"root",'
+	+ '"age":26,'
+	+ '"phone":"13800138001",'
+	+ '"email":"root@163.com",'
+	+ '"skill":["Java", "Java OOP", "Java SE", "Java WEB", "MySQL", "Spring"],'
+	+ '"department":{'
+	+ '	"id":1,'
+	+ '	"name":"RD"'
+	+ '}'
+	+ '}';
+	
+var json = JSON.parse(jsonString);
+
+console.log(json.username);
+console.log(json.age);
+console.log(json.phone);
+console.log(json.email);
+
+for (var i = 0; i < json.skill.length; i++) {
+	console.log(json.skill[i]);
+}
+
+console.log(json.department.name);
+</script>
+</body>
+</html>

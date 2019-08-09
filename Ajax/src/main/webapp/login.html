@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>用户登录</title>
+</head>
+<body>
+<form id="form-login">
+  <h1>用户登录</h1>
+  <p>请输入用户名：</p>
+  <p><input name="username" /></p>
+  <p>请输入密码：</p>
+  <p><input name="password" /></p>
+  <p><input id="btn-login" type="button" value="登录" /></p>
+</form>
+<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+$("#btn-login").click(function(){
+	// $.ajax()函数的参数是1个JSON对象
+	// url：请求提交到哪里
+	// data：需要提交的请求参数
+	// type：请求类型
+	// dataType：服务器端响应的数据类型，可以是text/xml/json，取值取决于Response Headers中的Content-Type
+	// success：服务器端HTTP响应码是2xx时的回调(callback)函数，函数的参数就是服务器端响应的正文结果
+	$.ajax({
+		"url":"user/login.do",
+		"data":$("#form-login").serialize(),
+		"type":"post",
+		"dataType":"json",
+		"success":function(result) {
+			if (result.state == 1) {
+				alert("登录成功！");
+			} else {
+				alert(result.message);
+			}
+		}
+	});
+});
+</script>
+</body>
+</html>
+
+
+
+
